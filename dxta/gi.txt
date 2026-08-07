@@ -1,0 +1,63 @@
+Search ",gi" (122 hits in 1 file of 1 searched) [Normal: Case]
+  C:\wimxlprogs\xnglop\translet-xnglo\dxta\ehd_clean.csv (122 hits)
+	Line 11426: GIANT,giant,zaent,,दानव
+	Line 11427: GIANTS,giants,zaents,,महाकाय
+	Line 11428: GIBBER,gibber,gibxr,,जलदी जल्दी बोलना
+	Line 11429: GIBBERISH,gibberish,gibrish,,बेमतलब शब्द
+	Line 11430: GIBBET,gibbet,gibxt,,फाँसी
+	Line 11431: GIBBON,gibbon,gibon,,लंगूर
+	Line 11432: GIBBOSITY,gibbosity,gibositi,,उभार
+	Line 11433: GIBBOUSNESS,gibbousness,gibxsnxs,,उभार
+	Line 11434: GIBE,gibe,zaib,,ताना
+	Line 11435: GIDDILY,giddily,gidili,,लड़खड़ाता हुआ
+	Line 11436: GIDDINESS,giddiness,giddinxs,,चक्कर
+	Line 11437: GIDDY,giddy,giddy,,अस्थिर
+	Line 11438: GIF,gif,gif,,संकुचित किया हुआ छायाचित्र
+	Line 11439: GIFT,gift,gift,,आसान बात
+	Line 11440: GIFTED,gifted,gifted,,गुणी
+	Line 11441: GIG,gig,gig,,संगीतमय प्रस्तुति
+	Line 11442: GIGABYTE,gigabyte,gigabyte,,कंप्यूटर की फाइल का आकार मात्रक
+	Line 11443: GIGANTIC,gigantic,gigantik,,बहुत बड़ा
+	Line 11444: GIGGLE,giggle,giggle,,ठट्ठा
+	Line 11445: GIGO,gigo,gigo,,गलत इनपुट पर गलत आउटपुट
+	Line 11446: GIGOLO,gigolo,gigolo,,वह पुरुष जो वृद्ध स्त्री पर आश्रित होता है
+	Line 11447: GILD,gild,gild,,कलई करना
+	Line 11448: GILDED,gilded,gilded,,उच्च वर्ग
+	Line 11449: GILDING,gilding,gilding,,पदार्थ जिससे कलई की जाती है
+	Line 11450: GILL,gill,gill,,गलफड़ा
+	Line 11451: GILLIE,gillie,gillie,,स्काटलैंड़
+	Line 11452: GILT,gilt,gilt,,शूकरी
+	Line 11453: GIMCRACK,gimcrack,gimkrak,,भड़कीला
+	Line 11454: GIMLET,gimlet,gimlet,,बरमा
+	Line 11455: GIMMICK,gimmick,gimmik,,चाल
+	Line 11456: GIMMICKRY,gimmickry,gimmikry,,ढोंग
+	Line 11457: GIMMICKY,gimmicky,gimmiky,,हथकंडापूर्ण
+	Line 11458: GIN,gin,gin,,जिन
+	Line 11459: GINGER,ginger,gingxr,,अदरकयुक्त
+	Line 11460: GINGERBREAD,gingerbread,gingxrbread,,अदरक पड़ी मीठा बिस्कुट
+	Line 11461: GINGERLY,gingerly,gingxrly,,डरते डरते
+	Line 11462: GINGERY,gingery,gingxry,,अदरक के समान
+	Line 11463: GINGHAM,gingham,gingham,,चारखानेदार सूती कपड़ा
+	Line 11464: GINGIVAL,gingiwal,gingiwal,,मसूड़ो
+	Line 11465: GINSENG,ginseng,ginseng,,औषधीय पौधा जो दक्षिण एशिया और उत्तर अमरीका में पायी जाती हैं
+	Line 11466: GIPSY,gipsy,gipsy,,खानाबदोश
+	Line 11467: GIRAFFE,giraffe,giraffe,,जिराफ़
+	Line 11468: GIRD,gird,gird,,बाँधना
+	Line 11469: GIRDER,girder,girdxr,,शहतीर
+	Line 11470: GIRDLE,girdle,girdle,,कमरपेटी
+	Line 11471: GIRL,girl,girl,,कन्या
+	Line 11472: GIRLFRIEND,girlfriend,girlfriend,,यारिन
+	Line 11473: GIRLHOOD,girlhood,girlhood,,कुमारीपन
+	Line 11474: GIRLISH,girlish,girlish,,कन्यासुलभ
+	Line 11475: GIRLISHLY,girlishly,girlishly,,कन्यासुलभ ढंग से
+	Line 11476: GIRO,giro,giro,,सितारा मछली
+	Line 11477: GIRTH,girth,girth,,कमर का घेरा
+	Line 11478: GISMO,gismo,gismo,,मशीन
+	Line 11479: GIST,gist,gist,,तात्पर्य
+	Line 11480: GIVE,giwe,giwe,,अदा करना
+	Line 11481: GIVEN,giwen,giwen,,आदी
+	Line 11482: GIVER,giwer,giwxr,,दाता
+	Line 11483: GIZA,giza,giza,,गीज़ा
+	Line 11484: GIZEH,gizeh,gizeh,,गीज़ा
+	Line 11485: GIZMO,gizmo,gizmo,,मशीन
+	Line 11486: GIZZARD,gizzard,gizzard,,द्वितीय पक्वाशय

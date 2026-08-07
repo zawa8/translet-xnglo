@@ -1,0 +1,137 @@
+import {
+  swar,
+  vyanjan,
+  matra,
+  commonHindiWords,
+  englishLetterSubs,
+  englishWordExceptions,
+  englishArticles,
+} from "./mappings";
+
+export type Lang = "english" | "hindi" | "xnglo_inglish";
+export type TargetLang = "xnglo_inglish" | "xnglo_vinqi";
+
+/** Devanagari Hindi -> xnglo_vinqi, character by character. */
+export function hindiToXngloVinqi(input: string): string {
+  const words = input.split(/(\s+)/);
+
+  return words
+    .map((word) => {
+      if (/^\s+$/.test(word) || word.length === 0) return word;
+
+      if (commonHindiWords[word]) return commonHindiWords[word];
+
+      let out = "";
+      let i = 0;
+      while (i < word.length) {
+        // try 2-char conjuncts (क्ष त्र ज्ञ) and swar with anusvara (अं) first
+        const twoChar = word.slice(i, i + 2);
+        if (vyanjan[twoChar] || swar[twoChar]) {
+          out += vyanjan[twoChar] || swar[twoChar];
+          i += 2;
+          continue;
+        }
+
+        const ch = word[i];
+        const isLastChar = i === word.length - 1;
+
+        // general rule: word-final anusvara (ं) is dropped for readability
+        if (ch === "ं" && isLastChar) {
+          i += 1;
+          continue;
+        }
+
+        if (vyanjan[ch]) {
+          out += vyanjan[ch];
+          i += 1;
+          // check if a matra follows this consonant
+          if (i < word.length && matra[word[i]] !== undefined) {
+            const isMatraLast = i === word.length - 1;
+            if (!(word[i] === "ं" && isMatraLast)) {
+              out += matra[word[i]];
+            }
+            i += 1;
+          } else if (i < word.length && word[i] === "्") {
+            // halant: consonant has no inherent vowel, drop nothing extra, just skip halant
+            i += 1;
+          }
+          continue;
+        }
+
+        if (swar[ch]) {
+          out += swar[ch];
+          i += 1;
+          continue;
+        }
+
+        if (matra[ch] !== undefined) {
+          out += matra[ch];
+          i += 1;
+          continue;
+        }
+
+        // unknown character (punctuation etc.) - keep as-is
+        out += ch;
+        i += 1;
+      }
+      return out;
+    })
+    .join("");
+}
+
+/** English -> xnglo_inglish, word by word. Rules still being finalized by the user. */
+export function englishToXngloInglish(input: string): string {
+  const tokens = input.split(/(\s+)/);
+
+  return tokens
+    .map((token) => {
+      if (/^\s+$/.test(token) || token.length === 0) return token;
+
+      // separate trailing punctuation so lookups match cleanly
+      const match = token.match(/^([a-zA-Z]+)([^a-zA-Z]*)$/);
+      if (!match) return token;
+      const [, wordRaw, trailing] = match;
+      const word = wordRaw.toLowerCase();
+
+      if (englishArticles.has(word)) return ""; // articles are dropped entirely
+
+      if (englishWordExceptions[word]) return englishWordExceptions[word] + trailing;
+
+      let out = word;
+
+      // *tion -> *sn
+      out = out.replace(/tion$/, "sn");
+
+      // letter x: three phonetic cases (heuristic pending final rules from the user)
+      out = out.replace(/^x/, "xks"); // e.g. x-ray -> xksre (eks- prefix sound)
+      out = out.replace(/xy/, "z"); // e.g. xylophone -> zailofon (z sound)
+      out = out.replace(/x/g, "ks"); // remaining mid/final -ks sound, e.g. six -> siks
+
+      // simple letter substitutions
+      out = out
+        .split("")
+        .map((c) => englishLetterSubs[c] ?? c)
+        .join("");
+
+      return out + trailing;
+    })
+    .join("");
+}
+
+/** Mapping #3 (English -> xnglo_vinqi) and #4 (xnglo_inglish -> xnglo_vinqi) are not yet
+ *  defined in the user's sheets. These stubs make that explicit in the UI rather than
+ *  guessing at a combined ruleset. */
+export function notYetAvailable(): string {
+  return "⏳ this mapping hasn't been defined in the source sheet yet";
+}
+
+export function transliterate(from: Lang, to: TargetLang, input: string): string {
+  if (!input.trim()) return "";
+
+  if (from === "hindi" && to === "xnglo_vinqi") return hindiToXngloVinqi(input);
+  if (from === "english" && to === "xnglo_inglish") return englishToXngloInglish(input);
+
+  // from === "english" && to === "xnglo_vinqi"  -> mapping #3, pending
+  // from === "xnglo_inglish" && to === "xnglo_vinqi" -> mapping #4, pending
+  return notYetAvailable();
+}
