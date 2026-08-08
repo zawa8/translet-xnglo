@@ -1,5 +1,6 @@
 from collections import Counter
 import re
+from google.transliteration import transliterate_text
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -95,6 +96,21 @@ ENGLISH_TO_VINQI_MEANING = {
 }
 
 
+def get_transliteration(text: str, lang_code: str = "hi") -> str:
+  """Transliterates text into the target language script using Google API."""
+  if not text:
+    return ""
+  try:
+    clean_text = re.sub(r"_\d+$", "", str(text)).strip()
+    result = transliterate_text(clean_text, lang_code=lang_code)
+    if isinstance(result, list):
+      return result[0] if result else clean_text
+    return str(result)
+  except Exception as e:
+    print(f"Transliteration error for '{text}': {e}")
+    return text
+
+
 def hindi_to_xnglo(hindi_text: str) -> str:
   """Converts Hindi text to Xnglo code using CHAR_MAP."""
   if not hindi_text:
@@ -121,9 +137,12 @@ def transform_e52_to_e23(text: str) -> str:
   if not text:
     return ""
   val = str(text)
-  val = val.replace("ve", "wey")
-  val = val.replace("va", "wx")
-  val = val.replace("vin", "wain")
+  val = val.replace("lover", "lwxr")
+  val = val.replace("never", "nxwxr")
+  val = val.replace("vest", "weist")
+  val = val.replace("vine", "wayin")
+  val = val.replace("vary", "wxyri")
+  val = val.replace("vet", "wyt")
   val = val.replace("v", "w")
   val = val.replace("j", "z")
   val = val.replace("q", "k")
@@ -131,7 +150,7 @@ def transform_e52_to_e23(text: str) -> str:
 
 
 def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
-  log_filename = "fill_xnglo5_gugxlSiit.log"
+  log_filename = "fill_xnglo6_gugxlSiit.log"
   with open(log_filename, "w", encoding="utf-8") as log_file:
 
     def log_print(message=""):
@@ -162,6 +181,7 @@ def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
       vinqi_col_idx = headers.index("vinqi")
       xv38_col_idx = headers.index("xv38")
       x38_col_idx = headers.index("x38")
+      vinqi_fonetik_col_idx = headers.index("vinqi_fonetik")
     except ValueError as e:
       log_print(f"Required header missing: {e}. Current headers: {headers}")
       return
@@ -209,13 +229,13 @@ def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
     e23_total_counts = Counter([val for val in transformed_e23_list if val])
     e23_tracker = Counter()
 
-    log_print("\n--- [LOG FILE] Global Frequencies for '*wx*' Entries ---")
-    for val, count in e23_total_counts.items():
-      if "wx" in val:
-        log_print(f"E23 Match -> '{val}': appears {count} times")
-    log_print(
-        "-----------------------------------------------------------\n"
-    )
+    # log_print("\n--- [LOG FILE] Global Frequencies for '*wx*' Entries ---")
+    # for val, count in e23_total_counts.items():
+      # if "wx" in val:
+        # log_print(f"E23 Match -> '{val}': appears {count} times")
+    # log_print(
+        # "-----------------------------------------------------------\n"
+    # )
 
     updates = []
 
@@ -254,25 +274,31 @@ def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
       if e23_total_counts[base_e23] > 1:
         e23_tracker[base_e23] += 1
         final_e23 = f"{base_e23}_{e23_tracker[base_e23]}"
-        if "wx" in base_e23:
-          log_print(
-              f"[LOG *wx*] Row {row_idx}: e52='{e52_raw}' ->"
-              f" base_e23='{base_e23}' (Count:"
-              f" {e23_total_counts[base_e23]}). Assigned: '{final_e23}'"
-          )
+        # if "wx" in base_e23:
+          # log_print(
+              # f"[LOG *wx*] Row {row_idx}: e52='{e52_raw}' ->"
+              # f" base_e23='{base_e23}' (Count:"
+              # f" {e23_total_counts[base_e23]}). Assigned: '{final_e23}'"
+          # )
       else:
         final_e23 = base_e23
-        if "wx" in base_e23:
-          log_print(
-              f"[LOG *wx*] Row {row_idx}: e52='{e52_raw}' ->"
-              f" base_e23='{base_e23}' (Unique). Assigned: '{final_e23}'"
-          )
+        # if "wx" in base_e23:
+          # log_print(
+              # f"[LOG *wx*] Row {row_idx}: e52='{e52_raw}' ->"
+              # f" base_e23='{base_e23}' (Unique). Assigned: '{final_e23}'"
+          # )
 
       # Convert vinqi -> xv38
       final_xv38 = hindi_to_xnglo(final_vinqi)
 
       # x38 mapping
       final_x38 = hindi_to_xnglo(final_vinqi)
+
+      # Fill vinqi_fonetik column using google.transliteration package
+      final_vinqi_fonetik = get_transliteration(final_e52, lang_code="hi")
+      log_print(
+              f"final_e52 is {final_e52} and final_vinqi_fonetik is {final_vinqi_fonetik}"
+          )
 
       updates.extend([
           {
@@ -295,28 +321,37 @@ def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
               "range": gspread.utils.rowcol_to_a1(row_idx, x38_col_idx + 1),
               "values": [[final_x38]],
           },
+          {
+              "range": gspread.utils.rowcol_to_a1(
+                  row_idx, vinqi_fonetik_col_idx + 1
+              ),
+              "values": [[final_vinqi_fonetik]],
+          },
       ])
 
     sheet.batch_update(updates)
-    log_print("\nSuccessfully processed 5-column sheet structure.")
+    log_print(
+        "\nSuccessfully processed 6-column sheet structure with Google API"
+        " transliteration."
+    )
     print(f"Log saved successfully to {log_filename}")
 
 
 if __name__ == "__main__":
   SPREADSHEET_ID = "14txKWvu5ow2jIbAWO_cttg96zR8hhu48TTRXqsCRnxc"
   WORDS_TO_ADD = [
-      "apple",
-      "lower",
-      "lover",
-      "newer",
-      "never",
-      "west",
-      "vest",
-      "wine",
-      "vine",
-      "wary",
-      "vary",
-      "wet",
-      "vet",
+      # "apple",
+      # "lower",
+      # "lover",
+      # "newer",
+      # "never",
+      # "west",
+      # "vest",
+      # "wine",
+      # "vine",
+      # "wary",
+      # "vary",
+      # "wet",
+      # "vet",
   ]
   process_and_fill_sheet(SPREADSHEET_ID, WORDS_TO_ADD)

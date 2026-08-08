@@ -1,7 +1,10 @@
-**/credentials.json
-**/prsnl.txt
+# wimxl prsnl giti
+**/giti/
 **/del/
 **/__pycache__/
+**/credentials.json
+**/prsnl.txt
+
 # git rm -r --cached **/__pycache__/
 node_modules
 .next
