@@ -61,6 +61,7 @@ CHAR_MAP = {
     "स": "s",
     "ह": "v",
     "ा": "a",
+    "ॉ": "a", 
     "ि": "i",
     "ी": "i",
     "ु": "u",
@@ -97,7 +98,7 @@ ENGLISH_TO_VINQI_MEANING = {
 
 
 def get_transliteration(text: str, lang_code: str = "hi") -> str:
-  """Transliterates text into the target language script using Google API."""
+  """transliterates text into the target language script using google api."""
   if not text:
     return ""
   try:
@@ -112,7 +113,7 @@ def get_transliteration(text: str, lang_code: str = "hi") -> str:
 
 
 def hindi_to_xnglo(hindi_text: str) -> str:
-  """Converts Hindi text to Xnglo code using CHAR_MAP."""
+  """converts hindi text to xnglo code using char_map."""
   if not hindi_text:
     return ""
 
@@ -122,11 +123,12 @@ def hindi_to_xnglo(hindi_text: str) -> str:
 
   text = re.sub(r"^_", "", text)
   text = re.sub(r"(\W)_", r"\1", text)
+  text = re.sub(r"([aiueo])_", r"\1", text)
   text = text.replace("_i", "yi").replace("_e", "ye").replace("_u", "xu")
 
   text = re.sub(r"N$", "", text)
   text = re.sub(r"N(\W)", r"\1", text)
-  text = text.replace("Nb", "mb").replace("NB", "mB")
+  text = text.replace("Nb", "mb").replace("NB", "mB").replace("Np", "mp").replace("Nf", "mf")
   text = re.sub(r"N(?![kKgG])", "n", text)
 
   return text
@@ -152,29 +154,18 @@ def transform_e52_to_e23(text: str) -> str:
 def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
   log_filename = "fill_xnglo6_gugxlSiit.log"
   with open(log_filename, "w", encoding="utf-8") as log_file:
-
     def log_print(message=""):
       print(message)
       log_file.write(message + "\n")
-
-    SCOPES = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive",
-    ]
-    creds = Credentials.from_service_account_file(
-        "credentials.json", scopes=SCOPES
-    )
+    SCOPES = [ "https://www.googleapis.com/auth/spreadsheets", "https://www.googleapis.com/auth/drive", ]
+    creds = Credentials.from_service_account_file( "credentials.json", scopes=SCOPES )
     client = gspread.authorize(creds)
-
     sheet = client.open_by_key(spreadsheet_id).worksheet("3k")
     all_rows = sheet.get_all_values()
-
     if not all_rows:
-      log_print("Worksheet '3k' is empty.")
+      log_print("worksheet '3k' is empty.")
       return
-
     headers = [h.strip() for h in all_rows[0]]
-
     try:
       e52_col_idx = headers.index("e52")
       e23_col_idx = headers.index("e23")
@@ -183,7 +174,7 @@ def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
       x38_col_idx = headers.index("x38")
       vinqi_fonetik_col_idx = headers.index("vinqi_fonetik")
     except ValueError as e:
-      log_print(f"Required header missing: {e}. Current headers: {headers}")
+      log_print(f"required header missing: {e}. current headers: {headers}")
       return
 
     existing_e52_words = set()
@@ -292,13 +283,14 @@ def process_and_fill_sheet(spreadsheet_id: str, new_words_list: list[str]):
       final_xv38 = hindi_to_xnglo(final_vinqi)
 
       # x38 mapping
-      final_x38 = hindi_to_xnglo(final_vinqi)
+      # final_x38 = hindi_to_xnglo(final_vinqi)
 
       # Fill vinqi_fonetik column using google.transliteration package
       final_vinqi_fonetik = get_transliteration(final_e52, lang_code="hi")
       log_print(
               f"final_e52 is {final_e52} and final_vinqi_fonetik is {final_vinqi_fonetik}"
           )
+      final_x38 = hindi_to_xnglo(final_vinqi_fonetik)
 
       updates.extend([
           {
