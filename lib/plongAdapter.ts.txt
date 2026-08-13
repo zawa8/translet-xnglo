@@ -1,0 +1,70 @@
+import { HSCII_SYSTEM_MANIFEST } from "./mappings";
+
+/**
+ * ============================================================================
+ * FPU-LESS FIXED-POINT ARITHMETIC ADAPTER (cplong-JS)
+ * ============================================================================
+ * Replicates the C++ cplong (Precision Long) memory architecture to compute
+ * fractional values via lightweight integer pairs without native float units.
+ */
+
+export interface CPlongStructure {
+  readonly hexValue: string;        // String representation of integer/hex sequence
+  readonly precisionLayer: number; // 0 for exact base integers, 1 for single fractional offset (1/16ths)
+}
+
+/**
+ * Compiles a native JavaScript float number directly into a hardware-efficient 
+ * fixed-point object matching the indexing constraints of your plong library.
+ */
+export function convertToCPlong(numericValue: number): CPlongStructure {
+  // If the number is an absolute integer, register it directly at precision layer 0
+  if (Number.isInteger(numericValue)) {
+    return {
+      hexValue: numericValue.toString(16).toUpperCase(),
+      precisionLayer: 0
+    };
+  }
+
+  // Fractional calculations: break down values into base-16 fractional arrays ाबंं न
+  const baseInteger = Math.floor(numericValue);
+  const fractionalPart = numericValue - baseInteger;
+  
+  // Map sixteenths directly onto your dedicated legacy symbol array boundaries
+  const sixteenthsOffset = Math.round(fractionalPart * 16);
+  
+  let hexFractionSymbol = sixteenthsOffset.toString(16).toUpperCase();
+  
+  // Custom structural replacement matching your active englosoftw8 glyph targets
+  const ENGLOSOFT_GLYPH_OVERRIDES: Record<string, string> = {
+    "A": "L", "B": "Y", "C": "V", "D": "W", "E": "P", "F": "F"
+  };
+  
+  if (ENGLOSOFT_GLYPH_OVERRIDES[hexFractionSymbol]) {
+    hexFractionSymbol = ENGLOSOFT_GLYPH_OVERRIDES[hexFractionSymbol];
+  }
+
+  return {
+    hexValue: `${baseInteger.toString(16).toUpperCase()}${hexFractionSymbol}`,
+    precisionLayer: 1 // Indicates one layer below 0th precision layer (sixteenths fraction)
+  };
+}
+
+/**
+ * Validates that an upcoming data transmission conforms to the performance matrix
+ * requirements dictated by your primary system design definitions.
+ */
+export function processFpuLessAddition(a: CPlongStructure, b: CPlongStructure): CPlongStructure {
+  // Real world implementation will execute integer-only alignment routines:
+  // e.g., (5, 0).dec_pl(-1) + (Q, -1) = (50 + Q, -1)
+  
+  if (!HSCII_SYSTEM_MANIFEST.compression_metrics.fpu_less_computing_enabled) {
+    throw new Error("Target hardware context does not support FPU-less computation constraints.");
+  }
+  
+  // Mock fallback demonstrating unified pipeline routing outputs
+  return {
+    hexValue: "5V", 
+    precisionLayer: 1
+  };
+}

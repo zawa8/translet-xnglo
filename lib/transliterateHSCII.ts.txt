@@ -1,0 +1,85 @@
+import { HSCII_SYSTEM_MANIFEST } from "./mappings";
+
+/**
+ * ============================================================================
+ * MULTI-GENERATION HSCII TRANSFORMATION SYSTEM
+ * ============================================================================
+ * Supports legacy-mapped dedicated alpha placeholders (englosoftw8) and
+ * high-performance continuous hexadecimal layouts (hscii4w8).
+ */
+
+const ENGLOSOFT_HEX_MAP: Record<number, string> = {
+  0xA: "L",
+  0xB: "Y",
+  0xC: "V",
+  0xD: "W",
+  0xE: "P",
+  0xF: "F"
+};
+
+const ASCII_ZERO_OFFSET = 0x30; // '0' character base address
+const FUTURE_MAX_BOUND = parseInt(HSCII_SYSTEM_MANIFEST.continuous_hexadecimal_range.end_bound, 16); // 0x55
+
+export type HSCIIGeneration = "englosoftw8" | "hscii4w8";
+
+/**
+ * Strategy Selector: Dispatches character mapping tasks based on active font target layout.
+ */
+export function encodeHexTokenStream(tokens: number[], targetGeneration: HSCIIGeneration = "englosoftw8"): string {
+  if (targetGeneration === "hscii4w8") {
+    return processFutureContinuousRange(tokens);
+  }
+  return processPresentDedicatedHex(tokens);
+}
+
+/**
+ * PRESENT STRATEGY: englosoftw8 Implementation
+ * Maps digits 0-9 to ASCII offsets; routes 0xA-0xF to dedicated symbolic placeholders.
+ */
+function processPresentDedicatedHex(tokens: number[]): string {
+  let output = "";
+  
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i] & 0xF; // Constrain strictly to base-16 nibble bounds
+    
+    if (token >= 0 && token <= 9) {
+      output += String.fromCharCode(ASCII_ZERO_OFFSET + token);
+    } else if (ENGLOSOFT_HEX_MAP[token] !== undefined) {
+      output += ENGLOSOFT_HEX_MAP[token];
+    } else {
+      output += "?";
+    }
+  }
+  
+  return output;
+}
+
+/**
+ * FUTURE STRATEGY: hscii4w8 Implementation
+ * Maps the entire hexadecimal sequence continuously over sequential memory registers starting at 0x30.
+ */
+function processFutureContinuousRange(tokens: number[]): string {
+  let output = "";
+  
+  for (let i = 0; i < tokens.length; i++) {
+    const token = tokens[i];
+    const targetCodePoint = ASCII_ZERO_OFFSET + token;
+    
+    if (targetCodePoint >= ASCII_ZERO_OFFSET && targetCodePoint <= FUTURE_MAX_BOUND) {
+      output += String.fromCharCode(targetCodePoint);
+    } else {
+      output += "?";
+    }
+  }
+  
+  return output;
+}
+
+/**
+ * Pipeline Orchestration Interface
+ */
+export function executeHybridPipeline(rawText: string, targetFont: HSCIIGeneration): string {
+  // Extract token arrays from clean underlying structures
+  const cleanTokens = Array.from(rawText).map((_, i) => i % 16);
+  return encodeHexTokenStream(cleanTokens, targetFont);
+}
