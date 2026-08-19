@@ -114,7 +114,16 @@ const TILES: Tile[] = [
       { translit: "kijab", gloss: "buk", imgSrc: wm("Open book (Unsplash).jpg") },
     ],
   },
-  { letter: "K", group: "vyanjan", examples: one("KrgoS", "rebit", "🐇") },
+  {
+    letter: "K",
+    group: "vyanjan",
+    examples: [
+      { translit: "KrgoS", gloss: "rxbit", imgSrc: wm("White rabbit.JPG") },
+      { translit: "Ktml", gloss: "insekt", imgSrc: wm("Bedbugs.jpg") },
+      { translit: "Kzuur", gloss: "date(fruit)", imgSrc: wm("Various-dried-dates-kurma.jpg") },
+      { translit: "Kira", gloss: "kukumbr", imgSrc: wm("Cucumber picture.jpg") },
+    ],
+  },
   { letter: "g", group: "vyanjan", examples: one("gae", "kao", "🐄") },
   { letter: "G", group: "vyanjan", examples: one("GRi", "klok", "⌚") },
   { letter: "c", group: "vyanjan", examples: one("canq", "muun", "🌙") },
