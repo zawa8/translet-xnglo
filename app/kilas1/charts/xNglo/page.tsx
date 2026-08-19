@@ -124,7 +124,17 @@ const TILES: Tile[] = [
       { translit: "Kira", gloss: "kukumbr", imgSrc: wm("Cucumber picture.jpg") },
     ],
   },
-  { letter: "g", group: "vyanjan", examples: one("gae", "kao", "🐄") },
+  {
+    letter: "g",
+    group: "vyanjan",
+    examples: [
+      { translit: "gae", gloss: "kao", imgSrc: tw("🐄") },
+      { translit: "gmla", gloss: "flowrpot", imgSrc: wm("Terracotta Pots (Unsplash).jpg") },
+      { translit: "gQa", gloss: "dNki", imgSrc: wm("Burro donkey.jpg") },
+      { translit: "gila", gloss: "wet", imgSrc: wm("Rain drops (Unsplash).jpg") },
+      { translit: "gol", gloss: "round", imgSrc: wm("Isulan Round Ball.jpg") },
+    ],
+  },
   { letter: "G", group: "vyanjan", examples: one("GRi", "klok", "⌚") },
   { letter: "c", group: "vyanjan", examples: one("canq", "muun", "🌙") },
   {
