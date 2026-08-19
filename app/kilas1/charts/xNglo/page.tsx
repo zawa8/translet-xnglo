@@ -93,7 +93,14 @@ const TILES: Tile[] = [
     ],
   },
   { letter: "e", group: "swar", examples: one("haJi", "elifent", "🐘") },
-  { letter: "o", group: "swar", examples: one("snjra", "orenz", "🍊") },
+  {
+    letter: "o",
+    group: "swar",
+    examples: [
+      { translit: "snjra", gloss: "orenz", imgSrc: tw("🍊") },
+      { translit: "oKli", gloss: "graindr", imgSrc: wm("Africa Mortar and pestle.jpg") },
+    ],
+  },
   { letter: "N", group: "swar", examples: one("xNguTi", "ring", "💍") },
 
   { letter: "k", group: "vyanjan", examples: one("kbujr", "piziyn", "🐦") },
