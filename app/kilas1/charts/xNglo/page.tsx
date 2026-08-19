@@ -58,7 +58,17 @@ const TILES: Tile[] = [
       { translit: "xnanas", gloss: "pineapple", imgSrc: wm("Pineapple.jpg") },
     ],
   },
-  { letter: "a", group: "swar", examples: one("xam", "mxNgo", "🥭") },
+  {
+    letter: "a",
+    group: "swar",
+    examples: [
+      { translit: "xam", gloss: "mxNgo", imgSrc: wm("Mango - single.jpg") },
+      { translit: "xalu", gloss: "potxto", imgSrc: wm("Potatoes.jpg") },
+      { translit: "xata", gloss: "wit flowr", imgSrc: wm("Wheat-flour.jpg") },
+      { translit: "xaNK", gloss: "ai", imgSrc: wm("Human eye anatomy.jpg") },
+      { translit: "xaNgn", gloss: "kortyrd", imgSrc: wm("Chettinad house courtyard.jpg") },
+    ],
+  },
   { letter: "i", group: "swar", examples: one("idli", "rais_kek", "🍙") },
   { letter: "u", group: "swar", examples: one("ullu", "aul", "🦉") },
   { letter: "e", group: "swar", examples: one("haJi", "elifent", "🐘") },
@@ -335,7 +345,8 @@ export default function XngloChartPage() {
           margin-top: 4px;
         }
         .popup-gloss {
-          font-size: 14px;
+          font-size: 26px;
+          font-weight: 700;
           color: #7a5a3a;
           margin-top: 4px;
         }
