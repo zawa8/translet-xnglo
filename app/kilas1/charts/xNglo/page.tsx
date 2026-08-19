@@ -82,7 +82,16 @@ const TILES: Tile[] = [
       { translit: "iiK", gloss: "sugxrken", imgSrc: wm("Cut sugarcane.jpg") },
     ],
   },
-  { letter: "u", group: "swar", examples: one("ullu", "aul", "🦉") },
+  {
+    letter: "u",
+    group: "swar",
+    examples: [
+      { translit: "ullu", gloss: "aul", imgSrc: tw("🦉") },
+      { translit: "uut", gloss: "kxmel", imgSrc: wm("Camel.jpg") },
+      { translit: "uun", gloss: "wuul", imgSrc: wm("Wool.www.usda.gov.jpg") },
+      { translit: "uNgli", gloss: "fiNgxr", imgSrc: wm("Hand - Index finger.jpg") },
+    ],
+  },
   { letter: "e", group: "swar", examples: one("haJi", "elifent", "🐘") },
   { letter: "o", group: "swar", examples: one("snjra", "orenz", "🍊") },
   { letter: "N", group: "swar", examples: one("xNguTi", "ring", "💍") },
@@ -92,7 +101,14 @@ const TILES: Tile[] = [
   { letter: "g", group: "vyanjan", examples: one("gae", "kao", "🐄") },
   { letter: "G", group: "vyanjan", examples: one("GRi", "klok", "⌚") },
   { letter: "c", group: "vyanjan", examples: one("canq", "muun", "🌙") },
-  { letter: "C", group: "vyanjan", examples: one("Caja", "xmbrela", "☂️") },
+  {
+    letter: "C",
+    group: "vyanjan",
+    examples: [
+      { translit: "Caja", gloss: "xmbrela", imgSrc: wm("Traffic Umbrella.jpg") },
+      { translit: "Cjri", gloss: "umbrela", imgSrc: wm("Pathein Umbrella.jpg") },
+    ],
+  },
   { letter: "z", group: "vyanjan", examples: one("zvaz", "ship", "🚢") },
   { letter: "Z", group: "vyanjan", examples: one("Znda", "flxg", "🚩") },
   { letter: "t", group: "vyanjan", examples: one("tmatr", "tomxto", "🍅") },
