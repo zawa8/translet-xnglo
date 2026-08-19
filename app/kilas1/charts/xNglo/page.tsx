@@ -77,7 +77,7 @@ const TILES: Tile[] = [
       { translit: "imli", gloss: "txmxrind", imgSrc: wm("Tamarindus indica pods.JPG") },
       { translit: "inzxn", gloss: "inzxn", imgSrc: wm("Colorized car engine.jpg") },
       { translit: "xnqxr", gloss: "in", imgSrc: wm("Cat in Box.JPG") },
-      { translit: "iNk", gloss: "iNk", imgSrc: wm("Out of ink.jpg") },
+      { translit: "iit", gloss: "brik", imgSrc: wm("Brick pile.jpg") },
       { translit: "iiK", gloss: "sugxrken", imgSrc: wm("Cut sugarcane.jpg") },
     ],
   },
