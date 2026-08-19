@@ -67,6 +67,7 @@ const TILES: Tile[] = [
       { translit: "xata", gloss: "wit flowr", imgSrc: wm("Wheat-flour.jpg") },
       { translit: "xaNK", gloss: "ai", imgSrc: wm("Human eye anatomy.jpg") },
       { translit: "xaNgn", gloss: "kortyrd", imgSrc: wm("Chettinad house courtyard.jpg") },
+      { translit: "xanj", gloss: "intestin", imgSrc: wm("Small Intestine.jpg") },
     ],
   },
   {
