@@ -103,7 +103,17 @@ const TILES: Tile[] = [
   },
   { letter: "N", group: "swar", examples: one("xNguTi", "ring", "💍") },
 
-  { letter: "k", group: "vyanjan", examples: one("kbujr", "piziyn", "🐦") },
+  {
+    letter: "k",
+    group: "vyanjan",
+    examples: [
+      { translit: "kbujr", gloss: "piziyn", imgSrc: tw("🐦") },
+      { translit: "kmxl", gloss: "lotus", imgSrc: wm("Lotus flower.JPG") },
+      { translit: "kiNg", gloss: "kiNg", imgSrc: wm("Chess-king.JPG") },
+      { translit: "kyuin", gloss: "kyuin", imgSrc: wm("Chess piece - White queen.jpg") },
+      { translit: "kijab", gloss: "buk", imgSrc: wm("Open book (Unsplash).jpg") },
+    ],
+  },
   { letter: "K", group: "vyanjan", examples: one("KrgoS", "rebit", "🐇") },
   { letter: "g", group: "vyanjan", examples: one("gae", "kao", "🐄") },
   { letter: "G", group: "vyanjan", examples: one("GRi", "klok", "⌚") },
