@@ -41,6 +41,12 @@ function twemojiCodepoints(emoji: string): string {
 function tw(emoji: string): string {
   return `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/72x72/${twemojiCodepoints(emoji)}.png`;
 }
+// Local repo-hosted images, in /public/images/xnglo/. Use this instead of
+// wm() when you want the file self-hosted rather than hotlinked to
+// Wikimedia -- drop the file in that folder and reference its name here.
+function local(fileName: string): string {
+  return `/images/xnglo/${fileName}`;
+}
 function one(translit: string, gloss: string, emoji: string): WordExample[] {
   return [{ translit, gloss, imgSrc: tw(emoji) }];
 }
@@ -112,6 +118,7 @@ const TILES: Tile[] = [
       { translit: "kiNg", gloss: "kiNg", imgSrc: wm("Chess-king.JPG") },
       { translit: "kyuin", gloss: "kyuin", imgSrc: wm("Chess piece - White queen.jpg") },
       { translit: "kijab", gloss: "buk", imgSrc: wm("Open book (Unsplash).jpg") },
+      { translit: "kvani", gloss: "stori", imgSrc: wm("An old man (grandfather) narrating a story to a group of kids (grandchildren) - a common scene in traditional Meitei society since ancient times till modern era.jpg") },
     ],
   },
   {
@@ -136,7 +143,18 @@ const TILES: Tile[] = [
     ],
   },
   { letter: "G", group: "vyanjan", examples: one("GRi", "klok", "⌚") },
-  { letter: "c", group: "vyanjan", examples: one("canq", "muun", "🌙") },
+  {
+    letter: "c",
+    group: "vyanjan",
+    examples: [
+      { translit: "canq", gloss: "muun", imgSrc: tw("🌙") },
+      { translit: "cmmxc", gloss: "spuun", imgSrc: wm("Spoon.JPG") },
+      { translit: "caar", gloss: "4", imgSrc: wm("Number 4.jpg") },
+      { translit: "cini", gloss: "sugxr", imgSrc: wm("White cane sugar.JPG") },
+      { translit: "ciil", gloss: "kite(bird)", imgSrc: wm("Black Kite I2 IMG 0992.jpg") },
+      { translit: "cija", gloss: "taigxr", imgSrc: wm("Cheetah.JPG") },
+    ],
+  },
   {
     letter: "C",
     group: "vyanjan",
@@ -148,8 +166,23 @@ const TILES: Tile[] = [
   { letter: "z", group: "vyanjan", examples: one("zvaz", "ship", "🚢") },
   { letter: "Z", group: "vyanjan", examples: one("Znda", "flxg", "🚩") },
   { letter: "t", group: "vyanjan", examples: one("tmatr", "tomxto", "🍅") },
-  { letter: "T", group: "vyanjan", examples: one("Tela", "kart", "🛒") },
-  { letter: "d", group: "vyanjan", examples: one("dmru", "smal drum", "🥁") },
+  {
+    letter: "T",
+    group: "vyanjan",
+    examples: [
+      { translit: "Tela", gloss: "kart", imgSrc: tw("🛒") },
+      { translit: "Tnda", gloss: "kold", imgSrc: wm("Ice Cube (6934137292).jpg") },
+      { translit: "TTera", gloss: "blxksmiJ", imgSrc: wm("Blacksmith working.jpg") },
+    ],
+  },
+  {
+    letter: "d",
+    group: "vyanjan",
+    examples: [
+      { translit: "dmru", gloss: "smal drum", imgSrc: tw("🥁") },
+      { translit: "doktr", gloss: "doktr", imgSrc: wm("A female doctor on call in Owerri, Imo State.jpg") },
+    ],
+  },
   { letter: "D", group: "vyanjan", examples: one("Dol", "drum", "🪘") },
   {
     letter: "j",
@@ -161,21 +194,67 @@ const TILES: Tile[] = [
       { translit: "jel", gloss: "veyroil", imgSrc: wm("Amla, hair oil.JPG") },
       { translit: "jali", gloss: "klxpping", imgSrc: wm("Hands-Clapping.jpg") },
       { translit: "jiir", gloss: "xrrow", imgSrc: wm("PVC Bow and arrow.jpg") },
+      { translit: "jiin", gloss: "Jrii", imgSrc: wm("Number 3.jpg") },
     ],
   },
-  { letter: "J", group: "vyanjan", examples: one("Jyela", "bxg", "👜") },
-  { letter: "q", group: "vyanjan", examples: one("qrwaza", "door", "🚪") },
+  {
+    letter: "J",
+    group: "vyanjan",
+    examples: [
+      { translit: "Jyela", gloss: "bxg", imgSrc: tw("👜") },
+      { translit: "Jali", gloss: "plet", imgSrc: wm("Thali, Plate in English.jpg") },
+    ],
+  },
+  {
+    letter: "q",
+    group: "vyanjan",
+    examples: [
+      { translit: "qrwaza", gloss: "door", imgSrc: tw("🚪") },
+      { translit: "qwai", gloss: "txblet", imgSrc: wm("VariousPills.jpg") },
+      { translit: "qvi", gloss: "kurd", imgSrc: wm("Yoghurt in bowl 011715.jpg") },
+    ],
+  },
   { letter: "Q", group: "vyanjan", examples: one("Qnus", "bo", "🏹") },
   { letter: "n", group: "vyanjan", examples: one("nl", "txp", "🚰") },
-  { letter: "p", group: "vyanjan", examples: one("pNka", "fxn", "🪭") },
+  {
+    letter: "p",
+    group: "vyanjan",
+    examples: [
+      { translit: "pNka", gloss: "fxn", imgSrc: wm("Akupe- locally made hand fan.jpg") },
+      { translit: "pvaR", gloss: "maunten", imgSrc: wm("Mountain range.jpg") },
+    ],
+  },
   { letter: "f", group: "vyanjan", examples: one("fuul", "flowr", "🌸") },
-  { letter: "b", group: "vyanjan", examples: one("bkri", "goxt", "🐐") },
+  {
+    letter: "b",
+    group: "vyanjan",
+    examples: [
+      { translit: "bkri", gloss: "goxt", imgSrc: tw("🐐") },
+      { translit: "bnqxr", gloss: "mNki", imgSrc: wm("MONKEY.JPG") },
+      { translit: "belxn", gloss: "rotiroller", imgSrc: wm("Wooden rolling pin isolated on white backgrounds.jpg") },
+      { translit: "biskut", gloss: "biskut", imgSrc: wm("Biscuit.jpg") },
+    ],
+  },
   { letter: "B", group: "vyanjan", examples: one("Balu", "bixr", "🐻") },
   { letter: "m", group: "vyanjan", examples: one("mCli", "fiS", "🐟") },
   { letter: "y", group: "vyanjan", examples: one("ygy", "sekred fayr", "🔥") },
-  { letter: "r", group: "vyanjan", examples: one("rJ", "ceriot", "🐎") },
+  {
+    letter: "r",
+    group: "vyanjan",
+    examples: [
+      { translit: "rJ", gloss: "ceriot", imgSrc: tw("🐎") },
+      { translit: "roti", gloss: "brexd", imgSrc: wm("Indian Roti (Home made).JPG") },
+    ],
+  },
   { letter: "l", group: "vyanjan", examples: one("lomRi", "foks", "🦊") },
-  { letter: "s", group: "vyanjan", examples: one("surxz", "sn", "☀️") },
+  {
+    letter: "s",
+    group: "vyanjan",
+    examples: [
+      { translit: "surxz", gloss: "sn", imgSrc: wm("Sun (Earth POV).jpg") },
+      { translit: "svayja", gloss: "velp", imgSrc: wm("The Handshake!.jpg") },
+    ],
+  },
   { letter: "S", group: "vyanjan", examples: one("Ser", "layn", "🦁") },
   { letter: "w", group: "vyanjan", examples: one("zNgxl", "forest", "🌳") },
   { letter: "v", group: "vyanjan", examples: one("vaJi", "elifent", "🐘") },
