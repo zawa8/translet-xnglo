@@ -114,6 +114,8 @@ const TILES: Tile[] = [
   },
   { letter: "N", group: "swr", examples: [
       { translit: "xNgur", gloss: "greps", imgSrc: local("xNgur.jpg") },
+      { translit: "xNguTa", gloss: "Jmb", imgSrc: local("xNguTa.jpg") },
+      { translit: "xNguTi", gloss: "riNg", imgSrc: local("xNguTi.jpg") },
     ],
   },
 
@@ -133,9 +135,9 @@ const TILES: Tile[] = [
     letter: "K",
     group: "wynzxn",
     examples: [
-      { translit: "KrgoS", gloss: "rxbit", imgSrc: wm("White rabbit.JPG") },
-      { translit: "Ktml", gloss: "insekt", imgSrc: wm("Bedbugs.jpg") },
-      { translit: "Kzuur", gloss: "date(fruit)", imgSrc: wm("Various-dried-dates-kurma.jpg") },
+      { translit: "KrgoS", gloss: "rxbit", imgSrc: local("KrgoS.jpg") },
+      { translit: "Ktml", gloss: "insekt", imgSrc: local("Ktmxl.jpg") },
+      { translit: "Kzuur", gloss: "det(frut)", imgSrc: local("Kzuur.jpg") },
       { translit: "Kira", gloss: "kukumbr", imgSrc: wm("Cucumber picture.jpg") },
     ],
   },
