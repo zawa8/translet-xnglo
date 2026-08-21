@@ -17,7 +17,7 @@ type WordExample = {
 
 type Tile = {
   letter: string;
-  group: "swar" | "vyanjan";
+  group: "swr" | "wynzxn";
   examples: WordExample[];
 };
 
@@ -54,19 +54,19 @@ function one(translit: string, gloss: string, emoji: string): WordExample[] {
 const TILES: Tile[] = [
   {
     letter: "x",
-    group: "swar",
+    group: "swr",
     examples: [
-      { translit: "xnt", gloss: "ant", imgSrc: wm("Formica polyctena 2.jpg") },
-      { translit: "xxpxl", gloss: "apple", imgSrc: wm("Red Apple.jpg") },
-      { translit: "xnar", gloss: "pomegranate", imgSrc: wm("Pomegranate fruit - whole and piece with arils.jpg") },
-      { translit: "xnda", gloss: "egg", imgSrc: wm("Egg.jpg") },
-      { translit: "xmruuq", gloss: "guava", imgSrc: wm("Guava pink fruit.jpg") },
+      { translit: "xxpxl", gloss: "sebu", imgSrc: wm("Red Apple.jpg") },
+      { translit: "xnar", gloss: "pomegranate", imgSrc: local("xnar.jpg") },
+      { translit: "xnda", gloss: "eg", imgSrc: wm("Egg.jpg") },
+      { translit: "xmruuq", gloss: "guawa", imgSrc: wm("Guava pink fruit.jpg") },
       { translit: "xnanas", gloss: "pineapple", imgSrc: wm("Pineapple.jpg") },
+      { translit: "xnt", gloss: "ant", imgSrc: wm("Formica polyctena 2.jpg") },
     ],
   },
   {
     letter: "a",
-    group: "swar",
+    group: "swr",
     examples: [
       { translit: "xam", gloss: "mxNgo", imgSrc: wm("Mango - single.jpg") },
       { translit: "xalu", gloss: "potxto", imgSrc: wm("Potatoes.jpg") },
@@ -78,7 +78,7 @@ const TILES: Tile[] = [
   },
   {
     letter: "i",
-    group: "swar",
+    group: "swr",
     examples: [
       { translit: "idli", gloss: "rais_kek", imgSrc: wm("Idli (5194454248).jpg") },
       { translit: "imli", gloss: "txmxrind", imgSrc: wm("Tamarindus indica pods.JPG") },
@@ -90,7 +90,7 @@ const TILES: Tile[] = [
   },
   {
     letter: "u",
-    group: "swar",
+    group: "swr",
     examples: [
       { translit: "ullu", gloss: "aul", imgSrc: tw("🦉") },
       { translit: "uut", gloss: "kxmel", imgSrc: wm("Camel.jpg") },
@@ -98,20 +98,28 @@ const TILES: Tile[] = [
       { translit: "uNgli", gloss: "fiNgxr", imgSrc: wm("Hand - Index finger.jpg") },
     ],
   },
-  { letter: "e", group: "swar", examples: one("haJi", "elifent", "🐘") },
+  { letter: "e", group: "swr", examples: [
+      { translit: "enxk", gloss: "speks", imgSrc: local("enxk.jpg") },
+      { translit: "eRi", gloss: "xNkxl", imgSrc: local("eRi.jpg") },
+      { translit: "eet", gloss: "aaT", imgSrc: local("eetkoen.jpg") },
+    ],
+  },
   {
     letter: "o",
-    group: "swar",
+    group: "swr",
     examples: [
       { translit: "snjra", gloss: "orenz", imgSrc: tw("🍊") },
       { translit: "oKli", gloss: "graindr", imgSrc: wm("Africa Mortar and pestle.jpg") },
     ],
   },
-  { letter: "N", group: "swar", examples: one("xNguTi", "ring", "💍") },
+  { letter: "N", group: "swr", examples: [
+      { translit: "xNgur", gloss: "greps", imgSrc: local("xNgur.jpg") },
+    ],
+  },
 
   {
     letter: "k",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "kbujr", gloss: "piziyn", imgSrc: tw("🐦") },
       { translit: "kmxl", gloss: "lotus", imgSrc: wm("Lotus flower.JPG") },
@@ -123,7 +131,7 @@ const TILES: Tile[] = [
   },
   {
     letter: "K",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "KrgoS", gloss: "rxbit", imgSrc: wm("White rabbit.JPG") },
       { translit: "Ktml", gloss: "insekt", imgSrc: wm("Bedbugs.jpg") },
@@ -133,19 +141,20 @@ const TILES: Tile[] = [
   },
   {
     letter: "g",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
-      { translit: "gae", gloss: "kao", imgSrc: tw("🐄") },
-      { translit: "gmla", gloss: "flowrpot", imgSrc: wm("Terracotta Pots (Unsplash).jpg") },
-      { translit: "gQa", gloss: "dNki", imgSrc: wm("Burro donkey.jpg") },
+      { translit: "gae", gloss: "kao", imgSrc: local("kao.jpg") },
+      { translit: "gmla", gloss: "flowrpot", imgSrc: local("gmla.jpg") },
+      { translit: "gQa", gloss: "dNki", imgSrc: local("gQa.jpg") },
       { translit: "gila", gloss: "wet", imgSrc: wm("Rain drops (Unsplash).jpg") },
-      { translit: "gol", gloss: "round", imgSrc: wm("Isulan Round Ball.jpg") },
+      { translit: "fulgoBi", gloss: "koliflowr", imgSrc: local("goBiful.jpg") },
+      { translit: "pjjagoBi", gloss: "kxbez", imgSrc: local("goBipjja.jpg") },
     ],
   },
-  { letter: "G", group: "vyanjan", examples: one("GRi", "klok", "⌚") },
+  { letter: "G", group: "wynzxn", examples: one("GRi", "klok", "⌚") },
   {
     letter: "c",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "canq", gloss: "muun", imgSrc: tw("🌙") },
       { translit: "cmmxc", gloss: "spuun", imgSrc: wm("Spoon.JPG") },
@@ -157,18 +166,18 @@ const TILES: Tile[] = [
   },
   {
     letter: "C",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "Caja", gloss: "xmbrela", imgSrc: wm("Traffic Umbrella.jpg") },
       { translit: "Cjri", gloss: "umbrela", imgSrc: wm("Pathein Umbrella.jpg") },
     ],
   },
-  { letter: "z", group: "vyanjan", examples: one("zvaz", "ship", "🚢") },
-  { letter: "Z", group: "vyanjan", examples: one("Znda", "flxg", "🚩") },
-  { letter: "t", group: "vyanjan", examples: one("tmatr", "tomxto", "🍅") },
+  { letter: "z", group: "wynzxn", examples: one("zvaz", "ship", "🚢") },
+  { letter: "Z", group: "wynzxn", examples: one("Znda", "flxg", "🚩") },
+  { letter: "t", group: "wynzxn", examples: one("tmatr", "tomxto", "🍅") },
   {
     letter: "T",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "Tela", gloss: "kart", imgSrc: tw("🛒") },
       { translit: "Tnda", gloss: "kold", imgSrc: wm("Ice Cube (6934137292).jpg") },
@@ -177,16 +186,16 @@ const TILES: Tile[] = [
   },
   {
     letter: "d",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "dmru", gloss: "smal drum", imgSrc: tw("🥁") },
       { translit: "doktr", gloss: "doktr", imgSrc: wm("A female doctor on call in Owerri, Imo State.jpg") },
     ],
   },
-  { letter: "D", group: "vyanjan", examples: one("Dol", "drum", "🪘") },
+  { letter: "D", group: "wynzxn", examples: one("Dol", "drum", "🪘") },
   {
     letter: "j",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "jrbuz", gloss: "watxrmelxn", imgSrc: tw("🍉") },
       { translit: "jori", gloss: "rizgord", imgSrc: wm("Ridge gourd( beerakai ).jpg") },
@@ -199,7 +208,7 @@ const TILES: Tile[] = [
   },
   {
     letter: "J",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "Jyela", gloss: "bxg", imgSrc: tw("👜") },
       { translit: "Jali", gloss: "plet", imgSrc: wm("Thali, Plate in English.jpg") },
@@ -207,27 +216,27 @@ const TILES: Tile[] = [
   },
   {
     letter: "q",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "qrwaza", gloss: "door", imgSrc: tw("🚪") },
       { translit: "qwai", gloss: "txblet", imgSrc: wm("VariousPills.jpg") },
       { translit: "qvi", gloss: "kurd", imgSrc: wm("Yoghurt in bowl 011715.jpg") },
     ],
   },
-  { letter: "Q", group: "vyanjan", examples: one("Qnus", "bo", "🏹") },
-  { letter: "n", group: "vyanjan", examples: one("nl", "txp", "🚰") },
+  { letter: "Q", group: "wynzxn", examples: one("Qnus", "bo", "🏹") },
+  { letter: "n", group: "wynzxn", examples: one("nl", "txp", "🚰") },
   {
     letter: "p",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "pNka", gloss: "fxn", imgSrc: wm("Akupe- locally made hand fan.jpg") },
       { translit: "pvaR", gloss: "maunten", imgSrc: wm("Mountain range.jpg") },
     ],
   },
-  { letter: "f", group: "vyanjan", examples: one("fuul", "flowr", "🌸") },
+  { letter: "f", group: "wynzxn", examples: one("fuul", "flowr", "🌸") },
   {
     letter: "b",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "bkri", gloss: "goxt", imgSrc: tw("🐐") },
       { translit: "bnqxr", gloss: "mNki", imgSrc: wm("MONKEY.JPG") },
@@ -235,29 +244,29 @@ const TILES: Tile[] = [
       { translit: "biskut", gloss: "biskut", imgSrc: wm("Biscuit.jpg") },
     ],
   },
-  { letter: "B", group: "vyanjan", examples: one("Balu", "bixr", "🐻") },
-  { letter: "m", group: "vyanjan", examples: one("mCli", "fiS", "🐟") },
-  { letter: "y", group: "vyanjan", examples: one("ygy", "sekred fayr", "🔥") },
+  { letter: "B", group: "wynzxn", examples: one("Balu", "bixr", "🐻") },
+  { letter: "m", group: "wynzxn", examples: one("mCli", "fiS", "🐟") },
+  { letter: "y", group: "wynzxn", examples: one("ygy", "sekred fayr", "🔥") },
   {
     letter: "r",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "rJ", gloss: "ceriot", imgSrc: tw("🐎") },
       { translit: "roti", gloss: "brexd", imgSrc: wm("Indian Roti (Home made).JPG") },
     ],
   },
-  { letter: "l", group: "vyanjan", examples: one("lomRi", "foks", "🦊") },
+  { letter: "l", group: "wynzxn", examples: one("lomRi", "foks", "🦊") },
   {
     letter: "s",
-    group: "vyanjan",
+    group: "wynzxn",
     examples: [
       { translit: "surxz", gloss: "sn", imgSrc: wm("Sun (Earth POV).jpg") },
       { translit: "svayja", gloss: "velp", imgSrc: wm("The Handshake!.jpg") },
     ],
   },
-  { letter: "S", group: "vyanjan", examples: one("Ser", "layn", "🦁") },
-  { letter: "w", group: "vyanjan", examples: one("zNgxl", "forest", "🌳") },
-  { letter: "v", group: "vyanjan", examples: one("vaJi", "elifent", "🐘") },
+  { letter: "S", group: "wynzxn", examples: one("Ser", "layn", "🦁") },
+  { letter: "w", group: "wynzxn", examples: one("zNgxl", "forest", "🌳") },
+  { letter: "v", group: "wynzxn", examples: one("vaJi", "elifent", "🐘") },
 ];
 
 export default function XngloChartPage() {
@@ -265,8 +274,8 @@ export default function XngloChartPage() {
   const [idx, setIdx] = useState(0);
   const touchX = useRef<number | null>(null);
 
-  const swar = TILES.filter((t) => t.group === "swar");
-  const vyanjan = TILES.filter((t) => t.group === "vyanjan");
+  const swr = TILES.filter((t) => t.group === "swr");
+  const wynzxn = TILES.filter((t) => t.group === "wynzxn");
 
   const openTile = (t: Tile) => {
     setActive(t);
@@ -297,23 +306,23 @@ export default function XngloChartPage() {
         <p className="sub">tc x skyuer &middot; slaid for nekst picture</p>
       </header>
 
-      <section aria-labelledby="swar-heading">
-        <h2 id="swar-heading" className="section-label">
-          swar (vowels)
+      <section aria-labelledby="swr-heading">
+        <h2 id="swr-heading" className="section-label">
+          swr (wowxls)
         </h2>
-        <div className="grid grid-swar">
-          {swar.map((t) => (
+        <div className="grid grid-swr">
+          {swr.map((t) => (
             <LetterTile key={t.letter} tile={t} onOpen={() => openTile(t)} />
           ))}
         </div>
       </section>
 
-      <section aria-labelledby="vyanjan-heading">
-        <h2 id="vyanjan-heading" className="section-label">
-          vyanjan (consonants)
+      <section aria-labelledby="wynzxn-heading">
+        <h2 id="wynzxn-heading" className="section-label">
+          wynzxn (konsonxnts)
         </h2>
-        <div className="grid grid-vyanjan">
-          {vyanjan.map((t) => (
+        <div className="grid grid-wynzxn">
+          {wynzxn.map((t) => (
             <LetterTile key={t.letter} tile={t} onOpen={() => openTile(t)} />
           ))}
         </div>
@@ -397,7 +406,7 @@ export default function XngloChartPage() {
         .section-label {
           font-size: 14px;
           font-weight: 700;
-          text-transform: uppercase;
+          text-transform: lowercase;
           letter-spacing: 0.12em;
           color: #7a5a3a;
           margin: 28px 4px 10px;
@@ -408,17 +417,17 @@ export default function XngloChartPage() {
           max-width: 760px;
           margin: 0 auto;
         }
-        .grid-swar {
+        .grid-swr {
           grid-template-columns: repeat(7, 1fr);
         }
-        .grid-vyanjan {
+        .grid-wynzxn {
           grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
         }
         @media (max-width: 520px) {
-          .grid-swar {
+          .grid-swr {
             grid-template-columns: repeat(4, 1fr);
           }
-          .grid-vyanjan {
+          .grid-wynzxn {
             grid-template-columns: repeat(5, 1fr);
           }
         }
@@ -525,7 +534,7 @@ export default function XngloChartPage() {
 }
 
 function LetterTile({ tile, onOpen }: { tile: Tile; onOpen: () => void }) {
-  const isSwar = tile.group === "swar";
+  const isSwar = tile.group === "swr";
   return (
     <button className="tile" onClick={onOpen} aria-label={`${tile.letter}, ${tile.examples[0].gloss}`}>
       {tile.letter}
