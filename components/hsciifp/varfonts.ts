@@ -18,8 +18,35 @@ export const xng52font = localFont({
 export const eng52font = localFont({
   src: './fonts/hscii/englosoftw8/englosoftw8utf/inglishenglosoftw8utf.woff2', variable: '--eng52font', display: 'swap',
 });
-export const hin38font = localFont({
-  src: './fonts/hscii/onlyw8/onlyw8utf/hindionlyw8utf.woff2', variable: '--hin38font', display: 'swap',
+export const xv38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/hindionlyw8utf.woff2', variable: '--xv38fontid', display: 'swap',
+});
+export const xj38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/teluguonlyw8utf.woff2', variable: '--xj38fontid', display: 'swap',
+});
+export const xb38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/banglaonlyw8utf.woff2', variable: '--xb38fontid', display: 'swap',
+});
+export const xm38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/malayalamonlyw8utf.woff2', variable: '--xm38fontid', display: 'swap',
+});
+export const xk38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/kannadaonlyw8utf.woff2', variable: '--xk38fontid', display: 'swap',
+});
+export const xp38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/gurmukhionlyw8utf.woff2', variable: '--xp38fontid', display: 'swap',
+});
+export const xo38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/oriyaonlyw8utf.woff2', variable: '--xo38fontid', display: 'swap',
+});
+export const xg38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/guzrationlyw8utf.woff2', variable: '--xg38fontid', display: 'swap',
+});
+export const xs38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/sinhalaonlyw8utf.woff2', variable: '--xs38fontid', display: 'swap',
+});
+export const xt38fontid = localFont({
+  src: './fonts/hscii/onlyw8/onlyw8utf/tamilonlyw8utf.woff2', variable: '--xt38fontid', display: 'swap',
 });
 export const hin52font = localFont({
   src: './fonts/hscii/englosoftw8/englosoftw8utf/hindienglosoftw8utf.woff2', variable: '--hin52font', display: 'swap',

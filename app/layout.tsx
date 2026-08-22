@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { xng52font, eng52font, binaryfont, korian52font, russian52font, hin38font, hin52font, bangla52font, odia52font, pnzabi52font, guzrati52font, 	telugu52font, knrra52font, sinhl52font, mlyalm52font, tmil52font, hindimatra38font } from '@/components/hsciifp/varfonts';
+import { xng52font, eng52font, binaryfont, korian52font, russian52font, xv38fontid, xp38fontid, xo38fontid, xb38fontid, xg38fontid, xk38fontid, xj38fontid, xt38fontid, xm38fontid, xs38fontid  } from '@/components/hsciifp/varfonts';
 import LocalFontPicker from "@/components/hsciifp/LocalFontPicker";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={
-			`${xng52font.variable} ${eng52font.variable} ${binaryfont.variable} ${korian52font.variable} ${russian52font.variable} ${hin38font.variable} ${hin52font.variable} ${bangla52font.variable} ${odia52font.variable} ${pnzabi52font.variable} ${guzrati52font.variable} ${telugu52font.variable} ${knrra52font.variable} ${sinhl52font.variable} ${mlyalm52font.variable} ${tmil52font.variable} ${hindimatra38font.variable}`
+			`${xng52font.variable} ${eng52font.variable} ${binaryfont.variable} ${korian52font.variable} ${russian52font.variable} ${xv38fontid.variable} ${xb38fontid.variable} ${xo38fontid.variable} ${xp38fontid.variable} ${xg38fontid.variable} ${xj38fontid.variable} ${xk38fontid.variable} ${xs38fontid.variable} ${xm38fontid.variable} ${xt38fontid.variable}`
 		}>
       <head>
       </head>
