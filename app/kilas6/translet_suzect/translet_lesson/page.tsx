@@ -1,18 +1,64 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  HINDI_CHAR_MAP, HINDI_KEYS_SORTED, 
-  BENGALI_CHAR_MAP, BENGALI_KEYS_SORTED, 
-  PUNJABI_CHAR_MAP, PUNJABI_KEYS_SORTED,
-  GUJARATI_CHAR_MAP, GUJARATI_KEYS_SORTED,
-  ODIA_CHAR_MAP, ODIA_KEYS_SORTED,
-  TAMIL_CHAR_MAP, TAMIL_KEYS_SORTED,
-  TELUGU_CHAR_MAP, TELUGU_KEYS_SORTED,
-  KANNADA_CHAR_MAP, KANNADA_KEYS_SORTED,
-  MALAYALAM_CHAR_MAP, MALAYALAM_KEYS_SORTED,
-  scriptToXnglo 
-} from "@/lib/mappings";
+import { hsciistr } from "@hscii/htrlib";
+
+// Maps each dropdown mode to how htrlib should run it. Most modes are
+// a straight (phrom, tu) pair that htrlib's duztr() handles entirely
+// itself -- translate/transliterate (for e52 input) or script
+// auto-detection (for u10 native-script input), then xi38 conversion.
+//
+// KNOWN LIBRARY BUG (htrlib 1.0.33): 'xg38' (Gujarati) is present in
+// hsciistr.e52_x38_translatecode_dict and in the output{} initializer,
+// but missing from hsciistr.tu_dikt -- the whitelist the constructor
+// and set_tu() validate against. Passing 'xg38' as tu fails that
+// validation and silently falls back to tu='xi38', mislabeling the
+// result. Worked around below by calling the lower-level primitives
+// directly for Gujarati instead of going through duztr()'s tu-gated
+// dispatch. Flagging this so it can be fixed upstream in htrlib
+// (just add xg38 to tu_dikt) -- once that lands, GUJARATI_WORKAROUND
+// can be deleted and xg38 folded into MODE_CONFIG like the others.
+const GUJARATI_TRANSLATE_CODE = "gu";
+
+type ModeConfig =
+  | { kind: "e52-all" } // mode 1: two outputs at once (xe38 + xv38)
+  | { kind: "single"; phrom: string; tu: string; gujaratiWorkaround?: boolean };
+
+const MODE_CONFIG: Record<string, ModeConfig> = {
+  "e52-to-all": { kind: "e52-all" },
+  "vinqi-to-xv38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xv38 },
+  "e52-to-x38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xe38 },
+  "e52-to-xb38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xb38 },
+  "bngali-to-xb38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xb38 },
+  "e52-to-xp38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xp38 },
+  "pnjabi-to-xp38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xp38 },
+  "e52-to-xg38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: "xg38", gujaratiWorkaround: true },
+  "guzraji-to-xg38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: "xg38", gujaratiWorkaround: true },
+  "e52-to-xo38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xo38 },
+  "odia-to-xo38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xo38 },
+  // Tamil = xt38 and Telugu = xj38 in htrlib's own dicts -- the page's
+  // state variable names below (xjm38.../xjelugu38...) predate the
+  // published library and use a different naming convention; kept as
+  // -is for UI/state continuity, mapped to the correct htrlib tu here.
+  "e52-to-xjm38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xt38 },
+  "jmil-to-xjm38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xt38 },
+  "e52-to-xjelugu38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xj38 },
+  "jelugu-to-xjelugu38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xj38 },
+  "e52-to-xk38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xk38 },
+  "kxnxdda-to-xk38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xk38 },
+  "e52-to-xm38": { kind: "single", phrom: hsciistr.phrom_dikt.e52, tu: hsciistr.tu_dikt.xm38 },
+  "mlyalxm-to-xm38": { kind: "single", phrom: hsciistr.phrom_dikt.u10, tu: hsciistr.tu_dikt.xm38 },
+};
+
+/** Gujarati workaround: bypasses duztr()'s tu_dikt-gated dispatch (see comment above), calling the same primitives it would have used. */
+async function runGujaratiWorkaround(text: string, isNativeScriptInput: boolean): Promise<string> {
+  const instance = new hsciistr(hsciistr.phrom_dikt.e52, hsciistr.tu_dikt.xi38).set_input(text);
+  if (!isNativeScriptInput) {
+    await instance.translate_e52_x(GUJARATI_TRANSLATE_CODE);
+  }
+  instance.uL2xin38();
+  return instance.output.xi38;
+}
 
 export default function HomePage() {
   const [mode, setMode] = useState<string>("e52-to-all");
@@ -34,6 +80,19 @@ export default function HomePage() {
     setXk38Output(""); setXm38Output("");
   };
 
+  // Which setState to write a mode's single output into.
+  const outputSetterFor = (modeKey: string) => {
+    if (modeKey.includes("xb38")) return setXb38Output;
+    if (modeKey.includes("xp38")) return setXp38Output;
+    if (modeKey.includes("xg38")) return setXg38Output;
+    if (modeKey.includes("xo38")) return setXo38Output;
+    if (modeKey.includes("xjm38")) return setXjm38Output;
+    if (modeKey.includes("xjelugu38")) return setXjelugu38Output;
+    if (modeKey.includes("xk38")) return setXk38Output;
+    if (modeKey.includes("xm38")) return setXm38Output;
+    return setXv38Output; // vinqi-to-xv38
+  };
+
   const handleTranslate = async (text: string, currentMode: string) => {
     setInputText(text);
     if (!text.trim()) {
@@ -42,136 +101,30 @@ export default function HomePage() {
     }
 
     try {
-      if (currentMode === "e52-to-all" || currentMode === "e52-to-x38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "transliterate", target: "hi" }),
-        });
-        const data = await res.json();
-        setX38Output(scriptToXnglo(data.resultText || text, HINDI_CHAR_MAP, HINDI_KEYS_SORTED));
+      const config = MODE_CONFIG[currentMode];
+      if (!config) return;
+
+      if (config.kind === "e52-all") {
+        const [xe38Result, xv38Result] = await Promise.all([
+          new hsciistr(hsciistr.phrom_dikt.e52, hsciistr.tu_dikt.xe38).set_input(text).duztr(),
+          new hsciistr(hsciistr.phrom_dikt.e52, hsciistr.tu_dikt.xv38).set_input(text).duztr(),
+        ]);
+        setX38Output(xe38Result.output.xe38);
+        setXv38Output(xv38Result.output.xv38);
+        return;
       }
 
-      if (currentMode === "e52-to-all") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "hi" }),
-        });
-        const data = await res.json();
-        setXv38Output(scriptToXnglo(data.resultText || text, HINDI_CHAR_MAP, HINDI_KEYS_SORTED));
+      // kind === "single"
+      const setOutput = outputSetterFor(currentMode);
+      if (config.gujaratiWorkaround) {
+        const isNativeScriptInput = config.phrom === hsciistr.phrom_dikt.u10;
+        const result = await runGujaratiWorkaround(text, isNativeScriptInput);
+        setOutput(result);
+        return;
       }
 
-      if (currentMode === "vinqi-to-xv38") {
-        setXv38Output(scriptToXnglo(text, HINDI_CHAR_MAP, HINDI_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xb38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "bn" }),
-        });
-        const data = await res.json();
-        setXb38Output(scriptToXnglo(data.resultText || text, BENGALI_CHAR_MAP, BENGALI_KEYS_SORTED));
-      }
-
-      if (currentMode === "bngali-to-xb38") {
-        setXb38Output(scriptToXnglo(text, BENGALI_CHAR_MAP, BENGALI_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xp38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "pa" }),
-        });
-        const data = await res.json();
-        setXp38Output(scriptToXnglo(data.resultText || text, PUNJABI_CHAR_MAP, PUNJABI_KEYS_SORTED));
-      }
-
-      if (currentMode === "pnjabi-to-xp38") {
-        setXp38Output(scriptToXnglo(text, PUNJABI_CHAR_MAP, PUNJABI_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xg38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "gu" }),
-        });
-        const data = await res.json();
-        setXg38Output(scriptToXnglo(data.resultText || text, GUJARATI_CHAR_MAP, GUJARATI_KEYS_SORTED));
-      }
-      if (currentMode === "guzraji-to-xg38") {
-        setXg38Output(scriptToXnglo(text, GUJARATI_CHAR_MAP, GUJARATI_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xo38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "or" }),
-        });
-        const data = await res.json();
-        setXo38Output(scriptToXnglo(data.resultText || text, ODIA_CHAR_MAP, ODIA_KEYS_SORTED));
-      }
-      if (currentMode === "odia-to-xo38") {
-        setXo38Output(scriptToXnglo(text, ODIA_CHAR_MAP, ODIA_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xjm38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "ta" }),
-        });
-        const data = await res.json();
-        setXjm38Output(scriptToXnglo(data.resultText || text, TAMIL_CHAR_MAP, TAMIL_KEYS_SORTED));
-      }
-      if (currentMode === "jmil-to-xjm38") {
-        setXjm38Output(scriptToXnglo(text, TAMIL_CHAR_MAP, TAMIL_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xjelugu38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "te" }),
-        });
-        const data = await res.json();
-        setXjelugu38Output(scriptToXnglo(data.resultText || text, TELUGU_CHAR_MAP, TELUGU_KEYS_SORTED));
-      }
-      if (currentMode === "jelugu-to-xjelugu38") {
-        setXjelugu38Output(scriptToXnglo(text, TELUGU_CHAR_MAP, TELUGU_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xk38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "kn" }),
-        });
-        const data = await res.json();
-        setXk38Output(scriptToXnglo(data.resultText || text, KANNADA_CHAR_MAP, KANNADA_KEYS_SORTED));
-      }
-      if (currentMode === "kxnxdda-to-xk38") {
-        setXk38Output(scriptToXnglo(text, KANNADA_CHAR_MAP, KANNADA_KEYS_SORTED));
-      }
-
-      if (currentMode === "e52-to-xm38") {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text, mode: "translate", target: "ml" }),
-        });
-        const data = await res.json();
-        setXm38Output(scriptToXnglo(data.resultText || text, MALAYALAM_CHAR_MAP, MALAYALAM_KEYS_SORTED));
-      }
-      if (currentMode === "mlyalxm-to-xm38") {
-        setXm38Output(scriptToXnglo(text, MALAYALAM_CHAR_MAP, MALAYALAM_KEYS_SORTED));
-      }
-
+      const result = await new hsciistr(config.phrom, config.tu).set_input(text).duztr();
+      setOutput(result.output[config.tu]);
     } catch (error) {
       console.error("Conversion error:", error);
     }
