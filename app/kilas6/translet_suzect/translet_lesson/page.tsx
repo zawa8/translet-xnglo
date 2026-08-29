@@ -140,13 +140,13 @@ export default function HomePage() {
     <main className="min-h-screen p-8 bg-gray-950 text-gray-100">
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">xNglo Translator</h1>
+          <h1 className="text-3xl font-bold">xNglo Barxj wiQya nikejxn</h1>
           <div className="flex gap-2">
             <a href="/" className="text-sm bg-gray-900 hover:bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-800 transition">
-              K12 →
-            </a>
+              xNglo Barxj wiQya nikejxn →
+            </a><br/>
             <a href="/kilasall/subzectwords/lesson_wrdmining" className="text-sm bg-gray-900 hover:bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-800 transition">
-              View TSV Dataset →
+              xNglo diksneri →
             </a>
           </div>
         </div>

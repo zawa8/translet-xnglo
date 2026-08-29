@@ -10,13 +10,13 @@ import Link from "next/link";
 // as they're built; the selects populate from this data automatically.
 const K12_TREE = {
   kilas1: {
-    label: "Kilas 1",
+    label: "kilas 1",
     subjects: {
       charts_subject: {
-        label: "Charts",
+        label: "carts",
         lessons: {
           xnglo_chart_lesson: {
-            label: "xNglo Chart",
+            label: "xNglo carts",
             href: "/kilas1/charts/xNglo",
           },
         },
@@ -24,13 +24,13 @@ const K12_TREE = {
     },
   },
   kilas6: {
-    label: "Kilas 6",
+    label: "kilas 6",
     subjects: {
       translet_suzect: {
-        label: "Translet",
+        label: "translet",
         lessons: {
           translet_lesson: {
-            label: "Translet Lesson",
+            label: "translet lesen",
             href: "/kilas6/translet_suzect/translet_lesson",
           },
         },
@@ -38,13 +38,13 @@ const K12_TREE = {
     },
   },
   kilasall: {
-    label: "Kilas All",
+    label: "kilas aal",
     subjects: {
       subzectwords: {
-        label: "Words",
+        label: "wrds",
         lessons: {
           lesson_wrdmining: {
-            label: "Word Mining",
+            label: "wrd miniNg",
             href: "/kilasall/subzectwords/lesson_wrdmining",
           },
         },
@@ -92,12 +92,12 @@ export default function K12Page() {
     <main className="min-h-screen p-8 bg-gray-950 text-gray-100">
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">K12</h1>
+          <h1 className="text-3xl font-bold">xNglo Barxj wiQya nikejxn</h1>
           <Link
             href="/kilas6/translet_suzect/translet_lesson"
             className="text-sm bg-gray-900 hover:bg-gray-800 text-gray-300 px-3 py-1.5 rounded-lg border border-gray-800 transition"
           >
-            Translet →
+            translet →
           </Link>
         </div>
 

@@ -56,7 +56,7 @@ const TILES: Tile[] = [
     letter: "x",
     group: "swr",
     examples: [
-      { translit: "xxpxl", gloss: "sebu", imgSrc: wm("Red Apple.jpg") },
+      { translit: "xxpxl", gloss: "sebu", imgSrc: local("seb.jpg") },
       { translit: "xnar", gloss: "pomegrenet", imgSrc: local("xnar.jpg") },
       { translit: "xnda", gloss: "eg", imgSrc: wm("Egg.jpg") },
       { translit: "xmruuq", gloss: "guawa", imgSrc: wm("Guava pink fruit.jpg") },
@@ -68,7 +68,7 @@ const TILES: Tile[] = [
     letter: "a",
     group: "swr",
     examples: [
-      { translit: "xam", gloss: "mxNgo", imgSrc: wm("Mango - single.jpg") },
+      { translit: "xam", gloss: "mxNgo", imgSrc: local("aam.jpg") },
       { translit: "xalu", gloss: "potxto", imgSrc: wm("Potatoes.jpg") },
       { translit: "xata", gloss: "wit flowr", imgSrc: wm("Wheat-flour.jpg") },
       { translit: "xaNK", gloss: "ai", imgSrc: wm("Human eye anatomy.jpg") },
@@ -300,8 +300,7 @@ export default function XngloChartPage() {
   return (
     <main className="chart-page">
       <header className="chart-head">
-        <p className="eyebrow">kilas 1 &middot; charts</p>
-        <h1>xNglo warnmala</h1>
+        <h1>xNglo wrnmala</h1>
         <p className="sub">tc x skyuer &middot; slaid for nekst picture</p>
       </header>
 
@@ -385,7 +384,6 @@ export default function XngloChartPage() {
         .eyebrow {
           margin: 0 0 4px;
           letter-spacing: 0.14em;
-          text-transform: uppercase;
           font-size: 12px;
           font-weight: 700;
           color: #c76b2c;
@@ -501,13 +499,13 @@ export default function XngloChartPage() {
           flex-shrink: 0;
         }
         .popup-translit {
-          font-size: 26px;
+          font-size: 64px;
           font-weight: 700;
           color: #402c1e;
           margin-top: 4px;
         }
         .popup-gloss {
-          font-size: 26px;
+          font-size: 60px;
           font-weight: 700;
           color: #7a5a3a;
           margin-top: 4px;
