@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@hscii/htrlib':
+        specifier: ^1.0.33
+        version: 1.0.33
       next:
         specifier: 14.2.5
         version: 14.2.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -191,6 +194,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@hscii/htrlib@1.0.33':
+    resolution: {integrity: sha512-KnuiS5bZbHQhoU8v3/GQAgd623cDoKSdbd1Ok2evAUkaMQRWynnQaXdufSvzVdsE90z/ghZ0VkiBD6WtN0fdlg==}
 
   '@next/env@14.2.5':
     resolution: {integrity: sha512-/zZGkrTOsraVfYjGP8uM0p6r0BDT6xWpkjdVbcz66PJVSpwXX3yNiRycxAuDfBKGWBrZBXRuK/YVlkNgxHGwmA==}
@@ -465,6 +471,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.1':
     optional: true
+
+  '@hscii/htrlib@1.0.33': {}
 
   '@next/env@14.2.5': {}
 
