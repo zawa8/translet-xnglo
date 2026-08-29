@@ -57,11 +57,11 @@ const TILES: Tile[] = [
     group: "swr",
     examples: [
       { translit: "xxpxl", gloss: "sebu", imgSrc: wm("Red Apple.jpg") },
-      { translit: "xnar", gloss: "pomegranate", imgSrc: local("xnar.jpg") },
+      { translit: "xnar", gloss: "pomegrenet", imgSrc: local("xnar.jpg") },
       { translit: "xnda", gloss: "eg", imgSrc: wm("Egg.jpg") },
       { translit: "xmruuq", gloss: "guawa", imgSrc: wm("Guava pink fruit.jpg") },
-      { translit: "xnanas", gloss: "pineapple", imgSrc: wm("Pineapple.jpg") },
-      { translit: "xnt", gloss: "ant", imgSrc: wm("Formica polyctena 2.jpg") },
+      { translit: "xnanas", gloss: "pain-xp-xl", imgSrc: wm("Pineapple.jpg") },
+      { translit: "xnt", gloss: "kiRa", imgSrc: wm("Formica polyctena 2.jpg") },
     ],
   },
   {
@@ -123,12 +123,9 @@ const TILES: Tile[] = [
     letter: "k",
     group: "wynzxn",
     examples: [
-      { translit: "kbujr", gloss: "piziyn", imgSrc: tw("🐦") },
-      { translit: "kmxl", gloss: "lotus", imgSrc: wm("Lotus flower.JPG") },
-      { translit: "kiNg", gloss: "kiNg", imgSrc: wm("Chess-king.JPG") },
-      { translit: "kyuin", gloss: "kyuin", imgSrc: wm("Chess piece - White queen.jpg") },
+      { translit: "kbujr", gloss: "piziyn", imgSrc: local("kbujr.jpg") },
+      { translit: "kmxl", gloss: "lotus", imgSrc: local("kmxl.jpg") },
       { translit: "kijab", gloss: "buk", imgSrc: wm("Open book (Unsplash).jpg") },
-      { translit: "kvani", gloss: "stori", imgSrc: wm("An old man (grandfather) narrating a story to a group of kids (grandchildren) - a common scene in traditional Meitei society since ancient times till modern era.jpg") },
     ],
   },
   {
@@ -138,7 +135,7 @@ const TILES: Tile[] = [
       { translit: "KrgoS", gloss: "rxbit", imgSrc: local("KrgoS.jpg") },
       { translit: "Ktml", gloss: "insekt", imgSrc: local("Ktmxl.jpg") },
       { translit: "Kzuur", gloss: "det(frut)", imgSrc: local("Kzuur.jpg") },
-      { translit: "Kira", gloss: "kukumbr", imgSrc: wm("Cucumber picture.jpg") },
+      { translit: "Kira", gloss: "kukumbr", imgSrc: local("Kira.jpg") },
     ],
   },
   {
